@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Price Tracker</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="layout">
+    
+    <!-- 🏆 Sidebar: Top 5 -->
+    <aside class="sidebar">
+      <h2>Top 5 Coins</h2>
+      <div id="topCoinsList" class="top-coins"></div>
+    </aside>
+
+    <!-- 💰 Main Content -->
+    <main class="main">
+      <h1>Crypto Price Tracker</h1>
+
+      <div class="search-container">
+        <div class="search-box">
+          <input
+            type="text"
+            id="cryptoName"
+            class="search-input"
+            placeholder="Search crypto (e.g., BTC, ETH, SOL)"
+            oninput="showSuggestions(this.value)"
+          />
+          <button class="search-btn" onclick="searchCrypto()">Search</button>
+        </div>
+        <div id="suggestions" class="suggestions"></div>
+      </div>
+
+      <div id="result" class="result">
+        <div class="result-title" id="cryptoTitle"></div>
+        <div class="result-price" id="cryptoPrice"></div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="cryptoChart" width="400" height="200"></canvas>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

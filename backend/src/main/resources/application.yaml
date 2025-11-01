@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: crypto
+
+server:
+  port: 9090
+  servlet:
+    context-path: /api/v1
+
+
+marketplace:
+  api:
+    key: ${CMC_API_KEY}

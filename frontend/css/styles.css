@@ -1,0 +1,154 @@
+*{
+  padding:0%;
+}
+
+.chart-container {
+  width: 60%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+#cryptoChart {
+  width: 100%;
+  height: 180px;   
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0d1117;
+  color: #fff;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #161b22;
+  padding: 20px;
+  border-right: 1px solid #30363d;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #00b4d8;
+}
+
+.top-coins {
+  margin-top: 15px;
+}
+
+.top-coins table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.top-coins td {
+  padding: 6px 4px;
+  border-bottom: 1px solid #30363d;
+  font-size: 0.9rem;
+}
+
+/* Main Area */
+.main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+h1 {
+  color: #00b4d8;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  position: relative;
+  max-width: 400px;
+}
+
+.search-box {
+  display: flex;
+}
+
+.search-input {
+  background-color: #0d1117;
+  color: white;
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px 0 0 8px;
+  border: none;
+  outline: none;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #2aa3df;
+  color: #fff;
+  font-weight: bolder;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+}
+
+.suggestions {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  background: #1e242c;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  z-index: 10;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover,
+.suggestion-item.highlighted {
+  background-color: #00b4d8;
+  color: #fff;
+}
+
+.no-suggestion {
+  padding: 8px;
+  color: #aaa;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.result-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.result-price {
+  font-size: 1.2rem;
+  color: #00b4d8;
+}
+
+.chart-container {
+  margin-top: 20px;
+  background: #161b22;
+  border-radius: 10px;
+  padding: 10px;
+}
