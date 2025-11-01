@@ -4,16 +4,11 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set working directory inside container
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml first for dependency caching
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-
-# ✅ Give executable permission to mvnw (fixes "Permission denied")
-RUN chmod +x mvnw
-
-# Copy the rest of your project files
+# Copy all project files
 COPY . .
+
+# ✅ Ensure mvnw has executable permission AFTER all copies
+RUN chmod +x ./mvnw
 
 # Build the Spring Boot JAR (skip tests for faster builds)
 RUN ./mvnw clean package -DskipTests
