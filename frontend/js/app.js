@@ -7,6 +7,8 @@ window.onload = async function () {
   await loadCryptoList();
   await loadTopCoins(); // load sidebar coins
 };
+const API_BASE = window.BACKEND_URL || "https://crypto-value-tracker.onrender.com/api/v1/crypto";
+
 
 // 🔹 Fetch all coin names for suggestions
 async function loadCryptoList() {
