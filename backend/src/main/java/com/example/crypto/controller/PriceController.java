@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/crypto")
-@CrossOrigin(origins = "http://127.0.0.1:3000/index.html")
+@CrossOrigin(origins = "*")
 public class PriceController
 {
     private static final Logger log = LoggerFactory.getLogger(PriceController.class);

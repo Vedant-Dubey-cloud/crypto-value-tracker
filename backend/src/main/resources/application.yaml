@@ -3,11 +3,13 @@ spring:
     name: crypto
 
 server:
-  port: 9090
+  # Use Render's dynamic port; default to 8080 for local runs
+  port: ${PORT:8080}
   servlet:
+    # Base path for all API endpoints
     context-path: /api/v1
-
 
 marketplace:
   api:
+    # API key loaded securely from environment variables
     key: ${CMC_API_KEY}
