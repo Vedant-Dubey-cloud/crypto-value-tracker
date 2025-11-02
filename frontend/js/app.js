@@ -2,18 +2,19 @@ let cryptoList = [];
 let chart;
 let selectedIndex = -1;
 
-// On page load
+// 🌐 Backend API base URL (your Render backend)
+const API_BASE = "https://crypto-value-tracker.onrender.com/api/v1/crypto";
+
+// 🚀 On page load
 window.onload = async function () {
   await loadCryptoList();
-  await loadTopCoins(); // load sidebar coins
+  await loadTopCoins();
 };
-const API_BASE = window.BACKEND_URL || "https://crypto-value-tracker.onrender.com/api/v1/crypto";
-
 
 // 🔹 Fetch all coin names for suggestions
 async function loadCryptoList() {
   try {
-    const response = await fetch("http://localhost:9090/api/v1/crypto/all");
+    const response = await fetch(`${API_BASE}/all`);
     const data = await response.json();
     cryptoList = data.data.map(c => c.symbol.toLowerCase());
     console.log(`✅ Loaded ${cryptoList.length} coins`);
@@ -22,21 +23,25 @@ async function loadCryptoList() {
   }
 }
 
-// 🔹 Always-visible Top 5 (sidebar)
+// 🔹 Load Top 5 Coins (Sidebar)
 async function loadTopCoins() {
   const container = document.getElementById("topCoinsList");
   container.innerHTML = "<p>Loading...</p>";
 
   try {
-    const response = await fetch("http://localhost:9090/api/v1/crypto/top/coins");
+    const response = await fetch(`${API_BASE}/top/coins`);
     const data = await response.json();
 
     const rows = data.data
       .map(
         (coin, i) =>
-          `<div class="coin-item"><strong>${i + 1}. ${coin.name}</strong><br/> $${coin.quote.USD.price.toFixed(2)}</div>`
+          `<div class="coin-item">
+             <strong>${i + 1}. ${coin.name}</strong><br/>
+             $${coin.quote.USD.price.toFixed(2)}
+           </div>`
       )
       .join("");
+
     container.innerHTML = rows;
   } catch (error) {
     console.error("❌ Error fetching top coins:", error);
@@ -44,7 +49,7 @@ async function loadTopCoins() {
   }
 }
 
-// 🔹 Search function
+// 🔹 Search a specific crypto
 async function searchCrypto() {
   const symbol = document.getElementById("cryptoName").value.trim().toUpperCase();
   const title = document.getElementById("cryptoTitle");
@@ -61,7 +66,7 @@ async function searchCrypto() {
   resultBox.style.display = "block";
 
   try {
-    const response = await fetch(`http://localhost:9090/api/v1/crypto/${symbol}`);
+    const response = await fetch(`${API_BASE}/${symbol}`);
     if (!response.ok) throw new Error("Crypto not found");
 
     const data = await response.json();
@@ -72,6 +77,7 @@ async function searchCrypto() {
     title.textContent = `${coinName} (${symbol})`;
     price.textContent = ` $${currentPrice}`;
 
+    // Fake mini-trend for display
     const prices = [
       currentPrice * 0.95,
       currentPrice * 0.97,
@@ -87,7 +93,7 @@ async function searchCrypto() {
   }
 }
 
-// 🔹 Chart
+// 🔹 Render Chart
 function renderChart(prices, labels) {
   const ctx = document.getElementById("cryptoChart").getContext("2d");
   if (chart) chart.destroy();
@@ -121,7 +127,7 @@ function renderChart(prices, labels) {
   });
 }
 
-// 🔹 Suggestions
+// 🔹 Search Suggestions
 function showSuggestions(query) {
   const box = document.getElementById("suggestions");
   if (!query) {
@@ -156,7 +162,7 @@ function selectSuggestion(coin) {
   searchCrypto();
 }
 
-// 🔹 Keyboard navigation for dropdown
+// 🔹 Keyboard Navigation for Suggestions
 document.getElementById("cryptoName").addEventListener("keydown", function (event) {
   const suggestions = document.querySelectorAll(".suggestion-item");
   if (suggestions.length === 0) return;
@@ -183,7 +189,7 @@ function updateHighlight(suggestions) {
   });
 }
 
-// Expose globally
+// 🌟 Expose globally
 window.showSuggestions = showSuggestions;
 window.selectSuggestion = selectSuggestion;
 window.searchCrypto = searchCrypto;
